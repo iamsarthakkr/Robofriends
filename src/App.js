@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import CardList from './CardList';
 import './App.css';
-import { robots } from './robots';
 import SearchBox from './SearchBox';
 
 class App extends Component {
    constructor() {
       super();
       this.state = {
-         robots: robots,
+         robots: [],
          searchField: '',
       };
+      console.log('constructor');
+   }
+   componentDidMount() {
+      //runs after constructor
+
+      //fetching the data from a url
+      fetch('https://jsonplaceholder.typicode.com/users')
+         .then((response) => response.json())
+         .then((users) => this.setState({ robots: users }));
+
+      console.log('componentDidMount');
    }
 
    onSearchChange = (event) => {
@@ -28,6 +38,14 @@ class App extends Component {
                );
          }
       );
+
+      console.log('render');
+
+      // tackling slow fetch requests
+      if (this.state.robots.length === 0) {
+         return <h1>Loading</h1>;
+      }
+
       return (
          <div className='tc'>
             <h1 className='f1'>RoboFriends</h1>
