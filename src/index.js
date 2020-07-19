@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./App";
 import "./index.css";
-import Hello from "./Hello";
+
 import * as serviceWorker from "./serviceWorker";
 //importing tacyons
 import "tachyons";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* adding new component */}
-    <Hello greeting={"Hello React Ninja!"} />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
